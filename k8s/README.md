@@ -196,6 +196,10 @@ kubectl set image deploy/backend backend=belajar-backend:1.0.1 -n demo-namespace
 
 Step-by-step commands for pushing `belajar-backend` and `belajar-frontend` to Docker Hub, and for making the cluster pull them from there: [dockerhub.md](dockerhub.md).
 
+## Going to production
+
+This setup is for learning. How it differs from a production-grade cluster (HTTPS, managed database, secrets management, GitOps, observability, security), what to practice next, and a step-by-step guide to deploying on AWS EKS: [production.md](production.md#deploying-to-aws-eks-in-production-step-by-step).
+
 ## Things to try (to see Kubernetes at work)
 
 | Experiment | Expected |
