@@ -1,0 +1,14 @@
+# ConfigMap = non-secret settings. Each key becomes an environment variable
+# in the backend pods (via envFrom). Spring Boot maps env vars to properties:
+#   SPRING_DATA_MONGODB_HOST  ->  spring.data.mongodb.host
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  labels:
+    app: backend
+data:
+  SPRING_DATA_MONGODB_HOST: mongodb               # the headless Service name
+  SPRING_DATA_MONGODB_PORT: "27017"
+  SPRING_DATA_MONGODB_DATABASE: belajar_db
+  SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin   # the root user lives in "admin"

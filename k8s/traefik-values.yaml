@@ -1,0 +1,42 @@
+# Helm values for the Traefik Ingress controller on kind.
+# Install:
+#   helm repo add traefik https://traefik.github.io/charts
+#   helm install traefik traefik/traefik -n traefik --create-namespace -f k8s/traefik-values.yaml
+#
+# Traefik runs on the control-plane node (label ingress-ready=true) and binds
+# directly to the node's ports 80/443 (hostPort). kind-config.yaml forwards
+# your PC's ports 80/443 to that node.
+
+deployment:
+  replicas: 1
+
+nodeSelector:
+  ingress-ready: "true"
+
+tolerations:
+  # The control-plane node is tainted so normal pods avoid it; allow Traefik.
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+
+ports:
+  web:
+    port: 8000          # port inside the container
+    hostPort: 80        # port on the node
+  websecure:
+    port: 8443
+    hostPort: 443
+
+# No LoadBalancer needed: traffic comes in through hostPort.
+service:
+  spec:
+    type: ClusterIP
+
+# Make "traefik" the default IngressClass and watch standard Ingress objects.
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+providers:
+  kubernetesIngress:
+    enabled: true

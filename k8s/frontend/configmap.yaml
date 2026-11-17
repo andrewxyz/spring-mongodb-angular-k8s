@@ -1,0 +1,28 @@
+# ConfigMap holding a whole FILE (nginx.conf). The Deployment mounts it as a
+# volume at /etc/nginx/conf.d/default.conf, so you can change nginx settings
+# without rebuilding the image (then: kubectl rollout restart deploy/frontend).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-nginx-config
+  labels:
+    app: frontend
+data:
+  default.conf: |
+    server {
+      listen 80;
+      root /usr/share/nginx/html;
+      index index.html;
+
+      # Angular routes like /tutorials/123 have no file on disk:
+      # fall back to index.html and let the Angular router handle them.
+      location / {
+        try_files $uri $uri/ /index.html;
+      }
+
+      # Hashed JS/CSS files can be cached for a long time.
+      location ~* \.(js|css|ico|png|svg|woff2?)$ {
+        expires 7d;
+        try_files $uri =404;
+      }
+    }

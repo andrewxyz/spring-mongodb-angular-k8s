@@ -1,0 +1,18 @@
+# Headless Service (clusterIP: None) for the MongoDB StatefulSet.
+# Instead of one virtual IP, DNS returns the pod IPs directly, and each pod
+# gets a stable DNS name:  mongodb-0.mongodb.demo-namespace.svc.cluster.local
+# Inside the namespace the backend simply connects to host "mongodb".
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  clusterIP: None
+  selector:
+    app: mongodb          # send traffic to pods with this label
+  ports:
+    - name: mongo
+      port: 27017
+      targetPort: 27017

@@ -1,0 +1,27 @@
+# Applies every manifest in one command:
+#   kubectl apply -k k8s/
+#   kubectl delete -k k8s/      (removes everything again; the Mongo PVC must be deleted separately)
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Puts every object below into this namespace.
+namespace: demo-namespace
+
+resources:
+  - namespace.yaml
+  # MongoDB: Secret + headless Service + StatefulSet (with PersistentVolumeClaim)
+  - mongodb/secret.yaml
+  - mongodb/service.yaml
+  - mongodb/statefulset.yaml
+  # Backend: ConfigMap + Deployment + Service
+  - backend/configmap.yaml
+  - backend/deployment.yaml
+  - backend/service.yaml
+  # Frontend: ConfigMap (nginx.conf) + Deployment + Service
+  - frontend/configmap.yaml
+  - frontend/deployment.yaml
+  - frontend/service.yaml
+  # HTTP routing from outside the cluster
+  - ingress.yaml
+  # A plain Pod for debugging (mongosh)
+  - debug/mongo-client-pod.yaml

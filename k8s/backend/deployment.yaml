@@ -1,0 +1,64 @@
+# Deployment = keeps N identical, stateless pods running. If a pod dies it
+# creates a new one; changing the image does a rolling update.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:                       # the pod "blueprint"
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: belajar-backend:1.0.0
+          imagePullPolicy: IfNotPresent   # use the image loaded with `kind load`
+          ports:
+            - name: http
+              containerPort: 8080
+          # Non-secret settings from the ConfigMap...
+          envFrom:
+            - configMapRef:
+                name: backend-config
+          # ...and the credentials from the Secret, renamed for Spring Boot
+          env:
+            - name: SPRING_DATA_MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: SPRING_DATA_MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: 100m
+              memory: 384Mi
+            limits:
+              memory: 768Mi
+          # Startup: give the JVM up to ~2.5 min to boot before other probes start
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            periodSeconds: 20

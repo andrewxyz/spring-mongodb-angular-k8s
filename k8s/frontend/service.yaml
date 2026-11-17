@@ -1,0 +1,15 @@
+# Stable name + IP in front of the 2 frontend pods.
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

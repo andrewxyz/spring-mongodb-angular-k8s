@@ -1,0 +1,5 @@
+# A Namespace groups related objects. Everything for this project lives here.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-namespace

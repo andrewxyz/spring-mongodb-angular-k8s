@@ -1,0 +1,17 @@
+# Service = a stable name + IP in front of the backend pods, load-balancing
+# between them. ClusterIP means reachable only inside the cluster; the
+# Ingress exposes it to the outside on /api.
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+  ports:
+    - name: http
+      port: 8080          # Service port
+      targetPort: http    # container port named "http" (8080)

@@ -1,0 +1,63 @@
+# Root .gitignore for the whole project.
+# angular-crud/ and spring-boot-data-mongodb/ also keep their own .gitignore files.
+
+# ---- Java / Maven (spring-boot-data-mongodb) ----
+target/
+!.mvn/wrapper/maven-wrapper.jar
+HELP.md
+*.class
+*.log
+hs_err_pid*.log
+
+# ---- Node / Angular (angular-crud) ----
+node_modules/
+dist/
+.angular/
+out-tsc/
+coverage/
+npm-debug.log*
+yarn-error.log*
+.sass-cache/
+testem.log
+
+# ---- Kubernetes / Helm ----
+# Helm chart downloads and rendered output
+charts/
+*.tgz
+*.rendered.yaml
+# kubeconfig files, never commit cluster credentials
+kubeconfig
+*.kubeconfig
+
+# ---- Secrets / local environment ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---- IDEs and editors ----
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.springBeans
+.sts4-cache/
+# VS Code: ignore personal state, keep shared project settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+*.sublime-workspace
+
+# ---- OS files ----
+.DS_Store
+Thumbs.db
+desktop.ini

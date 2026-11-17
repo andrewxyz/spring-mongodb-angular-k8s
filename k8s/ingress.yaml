@@ -1,0 +1,32 @@
+# Ingress = HTTP routing rules from outside the cluster to Services.
+# It does nothing alone: an Ingress controller (Traefik) reads it and routes.
+#
+#   http://mylocal.localhost/api/...  -> backend-service:8080
+#   http://mylocal.localhost/...      -> frontend-service:80
+#
+# Page and API share one origin, so the browser needs no CORS.
+# *.localhost resolves to 127.0.0.1 automatically, so no hosts-file edit.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: mylocal.localhost
+      http:
+        paths:
+          - path: /api              # longer prefix wins, so /api goes to the backend
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80
