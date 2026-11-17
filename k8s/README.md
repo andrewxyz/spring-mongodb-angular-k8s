@@ -192,6 +192,10 @@ kubectl set image deploy/backend backend=belajar-backend:1.0.1 -n demo-namespace
 ```
 (Also update the `image:` line in `backend/deployment.yaml` so the file matches.)
 
+## Publishing the images to Docker Hub
+
+Step-by-step commands for pushing `belajar-backend` and `belajar-frontend` to Docker Hub, and for making the cluster pull them from there: [dockerhub.md](dockerhub.md).
+
 ## Things to try (to see Kubernetes at work)
 
 | Experiment | Expected |
