@@ -90,7 +90,7 @@ Namespace, Pod, Deployment (2 replicas each for backend and frontend), StatefulS
 
 ## Known limitations
 
-This is a learning setup, not a production one (see [k8s/production.md](k8s/production.md) for how production differs):
+This is a learning setup, not a production one (see [k8s/docs/production.md](k8s/docs/production.md) for how production differs):
 
 - MongoDB runs as a single replica, and so does Traefik.
 - No HTTPS: port 443 is open but there's no certificate.

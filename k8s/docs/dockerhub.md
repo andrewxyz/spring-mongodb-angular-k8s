@@ -63,8 +63,8 @@ Docker Hub creates a repository automatically on the first push, and new reposit
 At the moment the manifests use `belajar-backend:1.0.0`, which only works because `kind load` copies the image into the nodes. Once the images are on Docker Hub, the cluster can pull them itself, so you can skip `kind load`.
 
 1. Change the `image:` lines:
-   - [backend/deployment.yaml](backend/deployment.yaml): `image: andrimardiana/belajar-backend:1.0.0`
-   - [frontend/deployment.yaml](frontend/deployment.yaml): `image: andrimardiana/belajar-frontend:1.0.0`
+   - [backend/deployment.yaml](../backend/deployment.yaml): `image: andrimardiana/belajar-backend:1.0.0`
+   - [frontend/deployment.yaml](../frontend/deployment.yaml): `image: andrimardiana/belajar-frontend:1.0.0`
 2. Apply and watch the rollout:
    ```bash
    kubectl apply -k k8s/

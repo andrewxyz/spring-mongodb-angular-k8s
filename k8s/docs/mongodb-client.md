@@ -1,6 +1,6 @@
 # Using the mongo-client pod (MongoDB for beginners)
 
-How to open a MongoDB shell inside the cluster and try some queries on the app's data. The pod is defined in [debug/mongo-client-pod.yaml](debug/mongo-client-pod.yaml). The examples use PowerShell and the `k` alias for `kubectl`; replace `k` with `kubectl` if you don't have the alias.
+How to open a MongoDB shell inside the cluster and try some queries on the app's data. The pod is defined in [debug/mongo-client-pod.yaml](../debug/mongo-client-pod.yaml). The examples use PowerShell and the `k` alias for `kubectl`; replace `k` with `kubectl` if you don't have the alias.
 
 ## 1. Open the shell
 
@@ -141,4 +141,4 @@ Then reconnect and run `db.tutorials.countDocuments()`. The count is unchanged b
   k exec mongo-client -n demo-namespace -- sh -c 'mongosh -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin mongodb/belajar_db --quiet --eval db.tutorials.countDocuments()'
   ```
 - **The pod isn't managed by a Deployment.** If you delete it, nothing recreates it. Remove it when you're done with `k delete pod mongo-client -n demo-namespace`.
-- **A graphical view:** [MongoDB Compass](https://www.mongodb.com/products/tools/compass) is good for beginners. Run `k port-forward svc/mongodb 27017:27017 -n demo-namespace` in one terminal and connect Compass to `mongodb://belajar:<password>@localhost:27017/?authSource=admin`. The password is in [mongodb/secret.yaml](mongodb/secret.yaml).
+- **A graphical view:** [MongoDB Compass](https://www.mongodb.com/products/tools/compass) is good for beginners. Run `k port-forward svc/mongodb 27017:27017 -n demo-namespace` in one terminal and connect Compass to `mongodb://belajar:<password>@localhost:27017/?authSource=admin`. The password is in [mongodb/secret.yaml](../mongodb/secret.yaml).

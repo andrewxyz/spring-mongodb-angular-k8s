@@ -194,15 +194,24 @@ kubectl set image deploy/backend backend=belajar-backend:1.0.1 -n demo-namespace
 
 ## Publishing the images to Docker Hub
 
-Step-by-step commands for pushing `belajar-backend` and `belajar-frontend` to Docker Hub, and for making the cluster pull them from there: [dockerhub.md](dockerhub.md).
+Step-by-step commands for pushing `belajar-backend` and `belajar-frontend` to Docker Hub, and for making the cluster pull them from there: [dockerhub.md](docs/dockerhub.md).
 
 ## Going to production
 
-This setup is for learning. How it differs from a production-grade cluster (HTTPS, managed database, secrets management, GitOps, observability, security), what to practice next, and a step-by-step guide to deploying on AWS EKS: [production.md](production.md#deploying-to-aws-eks-in-production-step-by-step).
+This setup is for learning. How it differs from a production-grade cluster (HTTPS, managed database, secrets management, GitOps, observability, security), what to practice next, and a step-by-step guide to deploying on AWS EKS: [production.md](docs/production.md#deploying-to-aws-eks-in-production-step-by-step).
+
+## What to learn next
+
+[learning-path.md](docs/learning-path.md): 16 topics to learn after this project (QoS, rolling updates, labels, Jobs and CronJobs, init containers, DaemonSets, HPA, NetworkPolicy, RBAC, pod security, Prometheus/Grafana, Helm, Argo CD, Gateway API, StatefulSets, cluster lifecycle) plus key concepts, each with examples on this cluster and a suggested order.
+
+## Inspecting and troubleshooting the cluster
+
+- [cluster-architecture.md](docs/cluster-architecture.md): how to see the control plane and worker nodes with `kubectl`, what each system component does, and how to check that it is healthy.
+- [troubleshooting.md](docs/troubleshooting.md): a step-by-step debugging method and the most common failures (ImagePullBackOff, Pending, CrashLoopBackOff, OOMKilled, not Ready, no endpoints, DNS, Ingress 404/503, NotReady nodes), with how to check and fix each one in this cluster.
 
 ## Querying MongoDB from the cluster
 
-How to open a MongoDB shell in the `mongo-client` pod, with sample queries for beginners (find, insert, update, delete): [mongodb-client.md](mongodb-client.md).
+How to open a MongoDB shell in the `mongo-client` pod, with sample queries for beginners (find, insert, update, delete): [mongodb-client.md](docs/mongodb-client.md).
 
 ## Things to try (to see Kubernetes at work)
 

@@ -42,7 +42,7 @@ Either way you also get cloud-backed storage classes (EBS, Persistent Disk) with
 
 ## 5. Config and secrets
 
-- The password in [mongodb/secret.yaml](mongodb/secret.yaml) is plain text. A base64 Kubernetes Secret is not encryption.
+- The password in [mongodb/secret.yaml](../mongodb/secret.yaml) is plain text. A base64 Kubernetes Secret is not encryption.
 - Production keeps secrets in **Vault, AWS Secrets Manager or Azure Key Vault**. **External Secrets Operator** or the **CSI driver** syncs them into the cluster.
 - Alternatives are **Sealed Secrets** or **SOPS**, which let you commit encrypted secrets to git.
 - etcd encryption at rest is turned on, and credentials are rotated.
