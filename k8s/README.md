@@ -200,6 +200,10 @@ Step-by-step commands for pushing `belajar-backend` and `belajar-frontend` to Do
 
 This setup is for learning. How it differs from a production-grade cluster (HTTPS, managed database, secrets management, GitOps, observability, security), what to practice next, and a step-by-step guide to deploying on AWS EKS: [production.md](production.md#deploying-to-aws-eks-in-production-step-by-step).
 
+## Querying MongoDB from the cluster
+
+How to open a MongoDB shell in the `mongo-client` pod, with sample queries for beginners (find, insert, update, delete): [mongodb-client.md](mongodb-client.md).
+
 ## Things to try (to see Kubernetes at work)
 
 | Experiment | Expected |
